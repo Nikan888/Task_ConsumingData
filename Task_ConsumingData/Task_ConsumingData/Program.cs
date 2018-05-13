@@ -41,11 +41,10 @@ namespace Task_ConsumingData
                 foreach (var x in BookList.books)
                 {
                     writer.WriteStartElement("Book");
-                    writer.WriteElementString("Name", x.Name);
-                    writer.WriteElementString("Author", x.AuthorName);
-                    writer.WriteElementString("Genre", x.Genre);
-                    writer.WriteElementString("Price", x.Price.ToString());
-                    writer.WriteEndElement();
+                    writer.WriteElementString("name", x.Name);
+                    writer.WriteElementString("author", x.AuthorName);
+                    writer.WriteElementString("genre", x.Genre);
+                    writer.WriteElementString("price", x.Price.ToString());
                     writer.WriteEndElement();
                 }
                 writer.WriteEndElement();
@@ -62,10 +61,10 @@ namespace Task_ConsumingData
             foreach(XmlNode xmlNode in xmlNodeList)
             {
                 XmlElement xmlElement = (XmlElement)xmlNode;
-                string Name = Convert.ToString(xmlNode.Attributes["Name"].Value);
-                string Author = xmlElement.GetElementsByTagName("Author")[0].ChildNodes[0].InnerText;
-                string Genre = xmlElement.GetElementsByTagName("Genre")[0].ChildNodes[0].InnerText;
-                string Price = xmlElement.GetElementsByTagName("Price")[0].ChildNodes[0].InnerText;
+                string Name = Convert.ToString(xmlNode.Attributes["name"].Value);
+                string Author = xmlElement.GetElementsByTagName("author")[0].ChildNodes[0].InnerText;
+                string Genre = xmlElement.GetElementsByTagName("genre")[0].ChildNodes[0].InnerText;
+                string Price = xmlElement.GetElementsByTagName("price")[0].ChildNodes[0].InnerText;
             }
         }
 
