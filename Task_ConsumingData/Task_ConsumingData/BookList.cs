@@ -8,11 +8,11 @@ using System.Xml.Linq;
 
 namespace Task_ConsumingData
 {
-    public class BookHelper
+    public class BookList
     {
         public static List<Book> books;
 
-        public BookHelper()
+        public BookList()
         {
             books = new List<Book>();
         }

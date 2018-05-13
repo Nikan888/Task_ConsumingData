@@ -15,20 +15,20 @@ namespace Task_ConsumingData
     {
         static void Main(string[] args)
         {
-            BookHelper bookHelper = new BookHelper();
-            bookHelper.AddBookToList("1984", "Orwell", "Social Science Fiction", 25);
-            bookHelper.AddBookToList("Dune", "Herbert", "Science Fiction", 74);
-            bookHelper.AddBookToList("Starship Troopers", "Heinlein", "Military Science Fiction", 98);
-            bookHelper.AddBookToList("Fahrenheit 451", "Bradbury", "Dystopian", 12);
-            bookHelper.AddBookToList("Nightfall", "Asimov", "Science Fiction", 115);
-            bookHelper.AddBookToList("Hard to Be a God", "Strugatsky", "Science Fiction", 24);
+            BookList bookList = new BookList();
+            bookList.AddBookToList("1984", "Orwell", "Social Science Fiction", 25);
+            bookList.AddBookToList("Dune", "Herbert", "Science Fiction", 74);
+            bookList.AddBookToList("Starship Troopers", "Heinlein", "Military Science Fiction", 98);
+            bookList.AddBookToList("Fahrenheit 451", "Bradbury", "Dystopian", 12);
+            bookList.AddBookToList("Nightfall", "Asimov", "Science Fiction", 115);
+            bookList.AddBookToList("Hard to Be a God", "Strugatsky", "Science Fiction", 24);
 
             SaveXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
             ReadXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
             SaveJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
             ReadJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
-            //WriteToXmlFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookHelper);
-            //WriteToJsonFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookHelper);
+            //WriteToXmlFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
+            //WriteToJsonFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
         }
 
         public static void SaveXMLFile(string pathToFile)
@@ -38,7 +38,7 @@ namespace Task_ConsumingData
             {
                 writer.WriteStartDocument();
                 writer.WriteStartElement("BOOKS");
-                foreach (var x in BookHelper.books)
+                foreach (var x in BookList.books)
                 {
                     writer.WriteStartElement("Book");
                     writer.WriteElementString("Name", x.Name);
@@ -71,7 +71,7 @@ namespace Task_ConsumingData
 
         public static void SaveJSONFile(string pathToFile)
         {
-            string json = JsonConvert.SerializeObject(BookHelper.books, Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(BookList.books, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(pathToFile, json);
         }
 
