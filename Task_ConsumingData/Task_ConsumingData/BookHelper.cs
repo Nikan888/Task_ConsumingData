@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace Task_ConsumingData
 {
     public class BookHelper
     {
-        List<Book> books;
+        public static List<Book> books;
 
         public BookHelper()
         {
@@ -30,5 +32,16 @@ namespace Task_ConsumingData
         {
             books.Remove(book);
         }
+
+        //public static void SaveXMLFile()
+        //{
+        //    XDocument xDoc = new XDocument(
+        //            new XElement("Books",
+        //                new XElement("Book",
+        //                    new XElement("Name", "1984"),
+        //                    new XElement("Author", "Orwell"))));
+        //                    
+        //    xDoc.Save("books.xml");
+        //}
     }
 }
