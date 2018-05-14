@@ -35,8 +35,8 @@ namespace Task_ConsumingData
             catch (Exception ex)
             {
                 Console.WriteLine("Ошибка: " + ex.Message);
+                Console.ReadKey();
             }
-            Console.ReadKey();
         }
 
         public static void SaveXMLFile(string pathToFile)
