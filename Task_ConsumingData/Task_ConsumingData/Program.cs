@@ -23,12 +23,20 @@ namespace Task_ConsumingData
             bookList.AddBookToList("Nightfall", "Asimov", "Science Fiction", 115);
             bookList.AddBookToList("Hard to Be a God", "Strugatsky", "Science Fiction", 24);
 
-            SaveXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
-            ReadXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
-            SaveJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
-            ReadJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
-            //WriteToXmlFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
-            //WriteToJsonFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
+            try
+            {
+                SaveXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
+                ReadXMLFile(AppDomain.CurrentDomain.BaseDirectory + "testxml.xml");
+                SaveJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
+                ReadJSONFile(AppDomain.CurrentDomain.BaseDirectory + "testjson.json");
+                //WriteToXmlFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
+                //WriteToJsonFile<List<Book>>(AppDomain.CurrentDomain.BaseDirectory, bookList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+            Console.ReadKey();
         }
 
         public static void SaveXMLFile(string pathToFile)
@@ -57,15 +65,19 @@ namespace Task_ConsumingData
         {
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(pathToFile);
-            XmlNodeList xmlNodeList = xmlDocument.GetElementsByTagName("Book");
-            foreach(XmlNode xmlNode in xmlNodeList)
+            if (BookList.books.Count > 0)
             {
-                XmlElement xmlElement = (XmlElement)xmlNode;
-                string Name = Convert.ToString(xmlNode.Attributes["name"].Value);
-                string Author = xmlElement.GetElementsByTagName("author")[0].ChildNodes[0].InnerText;
-                string Genre = xmlElement.GetElementsByTagName("genre")[0].ChildNodes[0].InnerText;
-                string Price = xmlElement.GetElementsByTagName("price")[0].ChildNodes[0].InnerText;
+                XmlNodeList xmlNodeList = xmlDocument.GetElementsByTagName("Book");
+                foreach (XmlNode xmlNode in xmlNodeList)
+                {
+                    XmlElement xmlElement = (XmlElement)xmlNode;
+                    string Name = xmlElement.GetElementsByTagName("name")[0].ChildNodes[0].InnerText;
+                    string Author = xmlElement.GetElementsByTagName("author")[0].ChildNodes[0].InnerText;
+                    string Genre = xmlElement.GetElementsByTagName("genre")[0].ChildNodes[0].InnerText;
+                    string Price = xmlElement.GetElementsByTagName("price")[0].ChildNodes[0].InnerText;
+                }
             }
+            else throw new Exception("Списка не существует");
         }
 
         public static void SaveJSONFile(string pathToFile)
